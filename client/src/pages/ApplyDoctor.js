@@ -1,11 +1,11 @@
-import React from "react";
-import Layout from "./../components/Layout";
-import { Col, Form, Input, Row, TimePicker, message } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { showLoading, hideLoading } from "../redux/features/alertSlice";
-import axios from "axios";
-import moment from "moment";
+import React from 'react';
+import Layout from './../components/Layout';
+import { Col, Form, Input, Row, TimePicker, message } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { showLoading, hideLoading } from '../redux/features/alertSlice';
+import axios from 'axios';
+import moment from 'moment';
 const ApplyDoctor = () => {
   const { user } = useSelector((state) => state.user);
 
@@ -16,93 +16,93 @@ const ApplyDoctor = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "/api/v1/user/apply-doctor",
+        '/api/v1/user/apply-doctor',
         {
           ...values,
           userId: user._id,
           timings: [
-            moment(values.timings[0]).format("HH:mm"),
-            moment(values.timings[1]).format("HH:mm"),
+            moment(values.timings[0]).format('HH:mm'),
+            moment(values.timings[1]).format('HH:mm'),
           ],
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
       dispatch(hideLoading());
       if (res.data.success) {
         message.success(res.data.message);
-        navigate("/");
+        navigate('/');
       } else {
         message.error(res.data.message);
       }
     } catch (error) {
       dispatch(hideLoading());
       console.log(error);
-      message.error("Somthing Went Wrrong ");
+      message.error('Somthing Went Wrrong ');
     }
   };
   return (
     <Layout>
-      <h1 className="text-center">Apply Doctor</h1>
-      <Form layout="vertical" onFinish={handleFinish} className="m-3">
-        <h4 className="">Personal Details : </h4>
+      <h1 className='text-center'>Apply Doctor</h1>
+      <Form layout='vertical' onFinish={handleFinish} className='m-3'>
+        <h4 className=''>Personal Details : </h4>
         <Row gutter={20}>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="First Name"
-              name="firstName"
+              label='First Name'
+              name='firstName'
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your first name" />
+              <Input type='text' placeholder='your first name' />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Last Name"
-              name="lastName"
+              label='Last Name'
+              name='lastName'
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your last name" />
+              <Input type='text' placeholder='your last name' />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Phone No"
-              name="phone"
+              label='Phone No'
+              name='phone'
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your contact no" />
+              <Input type='text' placeholder='your contact no' />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Email"
-              name="email"
+              label='Email'
+              name='email'
               required
               rules={[{ required: true }]}
             >
-              <Input type="email" placeholder="your email address" />
+              <Input type='email' placeholder='your email address' />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
-            <Form.Item label="Website" name="website">
-              <Input type="text" placeholder="your website" />
+            <Form.Item label='Website' name='website'>
+              <Input type='text' placeholder='your website' />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Address"
-              name="address"
+              label='Address'
+              name='address'
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your clinic address" />
+              <Input type='text' placeholder='your clinic address' />
             </Form.Item>
           </Col>
         </Row>
@@ -110,42 +110,42 @@ const ApplyDoctor = () => {
         <Row gutter={20}>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Specialization"
-              name="specialization"
+              label='Specialization'
+              name='specialization'
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your specialization" />
+              <Input type='text' placeholder='your specialization' />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Experience"
-              name="experience"
+              label='Experience'
+              name='experience'
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your experience" />
+              <Input type='text' placeholder='your experience' />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
             <Form.Item
-              label="Fees Per Cunsaltation"
-              name="feesPerCunsaltation"
+              label='Fees Per Cunsaltation'
+              name='feesPerCunsaltation'
               required
               rules={[{ required: true }]}
             >
-              <Input type="text" placeholder="your contact no" />
+              <Input type='text' placeholder='your contact no' />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}>
-            <Form.Item label="Timings" name="timings" required>
-              <TimePicker.RangePicker format="HH:mm" />
+            <Form.Item label='Timings' name='timings' required>
+              <TimePicker.RangePicker format='HH:mm' />
             </Form.Item>
           </Col>
           <Col xs={24} md={24} lg={8}></Col>
           <Col xs={24} md={24} lg={8}>
-            <button className="btn btn-primary form-btn" type="submit">
+            <button className='btn btn-primary form-btn' type='submit'>
               Submit
             </button>
           </Col>
